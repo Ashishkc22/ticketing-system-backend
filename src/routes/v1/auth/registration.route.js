@@ -1,8 +1,10 @@
 const Router = require("express").Router();
+const { userRegistration } = require("../../../processors");
 
 function registration(req, res) {
   try {
-    console.log("reg");
+    console.log("req.body", req.body);
+    // const result = userRegistration()
     return res.send({
       message: "ok",
       error: null,
