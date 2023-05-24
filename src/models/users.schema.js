@@ -1,6 +1,6 @@
 const { Schema, Types, model } = require("mongoose");
 
-const { database } = require("../constants");
+const { database: DBConstants } = require("../constants");
 
 const userSehema = new Schema({
   entity: Types.ObjectId,
@@ -9,7 +9,7 @@ const userSehema = new Schema({
   userName: { type: String, required: true },
   email: {
     type: String,
-    match: [database.email, "Please fill a valid email address"],
+    match: [DBConstants.email, "Please fill a valid email address"],
     required: true,
   },
   password: {
