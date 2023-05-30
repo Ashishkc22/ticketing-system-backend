@@ -3,7 +3,13 @@ const { Schema, Types, model } = require("mongoose");
 const { database: DBConstants } = require("../constants");
 
 const userSehema = new Schema({
-  entity: Types.ObjectId,
+  // entityId: Types.ObjectId,
+  // entityRoles: [
+  //   {
+  //     id: Types.ObjectId,
+  //     name: String,
+  //   },
+  // ],
   name: String,
   lastName: String,
   userName: { type: String, required: true },
@@ -18,4 +24,4 @@ const userSehema = new Schema({
   },
 });
 
-module.exports = model("Users", userSehema);
+module.exports = userSehema;

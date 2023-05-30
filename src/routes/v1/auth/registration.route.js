@@ -1,12 +1,11 @@
 const Router = require("express").Router();
 const { userRegistration } = require("../../../processors");
 
-function registration(req, res) {
+async function registration(req, res) {
   try {
-    console.log("req.body", req.body);
-    // const result = userRegistration()
+    const result = await userRegistration(req.body);
     return res.send({
-      message: "ok",
+      message: result,
       error: null,
     });
   } catch (err) {

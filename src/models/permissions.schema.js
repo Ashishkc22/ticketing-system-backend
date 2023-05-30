@@ -5,4 +5,4 @@ const permissions = new Schema({
   description: String,
 });
 
-module.exports = model("Permissions", permissions);
+module.exports = permissions;

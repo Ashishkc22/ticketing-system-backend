@@ -3,8 +3,8 @@ async function startServer() {
   require("dotenv").config();
 
   try {
-    const { dbConnnection } = require("./src/config/db.config");
-    await dbConnnection();
+    const { connectDB } = require("./src/config/db.config");
+    await connectDB();
   } catch (error) {
     throw error;
   }
