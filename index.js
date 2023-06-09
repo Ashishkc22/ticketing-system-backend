@@ -18,8 +18,11 @@ async function startServer() {
   app.use(bodyParser.json());
 
   // load middlewares
-  const { cors } = require("./src/middlewares");
+  const helmet = require("helmet");
+  const { cors, response } = require("./src/middlewares");
   app.use(cors);
+  app.use(response);
+  app.use(helmet());
 
   // Routes
   app.use("/api", require("./src/routes"));

@@ -1,4 +1,4 @@
-const { keys } = require("lodash");
+const { keys, isEmpty } = require("lodash");
 const dbConfig = require("../config/db.config");
 
 const schemas = {
@@ -8,7 +8,7 @@ const schemas = {
   permissions: require("./permissions.schema"),
 };
 
-const models = [];
+const models = {};
 
 async function blindModels() {
   try {
@@ -25,7 +25,7 @@ async function blindModels() {
 
 async function getModels() {
   try {
-    if (models.length) {
+    if (!isEmpty(models)) {
       return models;
     } else {
       await blindModels();

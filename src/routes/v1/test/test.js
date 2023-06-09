@@ -1,9 +1,11 @@
 const Router = require("express").Router();
 
 Router.get("/", (req, res) => {
-  return res.status(200).json({
-    test: "successful",
-  });
+  return res.sendData(
+    "successful",
+
+    200
+  );
 });
 
 module.exports = Router;
