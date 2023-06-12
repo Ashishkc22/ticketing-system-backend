@@ -2,25 +2,23 @@ const { isEmpty } = require("lodash");
 const bcrypt = require("bcrypt");
 const { getModels } = require("../models");
 const token = require("../utils/token.util");
-module.exports = async ({ userName, password }) => {
+module.exports = async ({ email, password }) => {
   try {
-    if (!userName || !password) {
+    if (!email || !password) {
       throw new Error("Missing parameters");
     }
     const modules = await getModels();
-    console.log("modules--", modules.users);
-    const userExists = await modules.users.findOne({ userName });
+    const userExists = await modules.users.findOne({ email });
     if (isEmpty(userExists)) {
       throw new Error("User doesn't exist");
     }
-    console.log("userExists", userExists);
     const isPasswordMatched = await bcrypt.compare(
       password,
       userExists.password
     );
     if (isPasswordMatched) {
       return token.createToken({
-        data: { name: userExists.userName, email: userExists.email },
+        data: { name: userExists?.name, email: userExists?.email },
       });
     } else {
       return isPasswordMatched;

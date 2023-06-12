@@ -1,14 +1,17 @@
+const Router = require("express").Router();
 const { loginUser } = require("../../../processors");
 
-module.exports = async (req, res, next) => {
+const loginRoute = async (req, res, next) => {
   try {
-    const { userName, password } = req.body;
-    const result = await loginUser({ userName, password });
+    const { email, password } = req.body;
+    const result = await loginUser({ email, password });
     if (!result) {
       throw new Error("Incorrect password.");
     }
-    res.sendData({ token: result }, 200);
+    res.sendData({ data: { token: result } }, 200);
   } catch (error) {
-    res.sendData(error.message, 402);
+    res.sendData({ error: error.message }, 402);
   }
 };
+Router.post("/", loginRoute);
+module.exports = Router;
