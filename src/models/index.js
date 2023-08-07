@@ -2,10 +2,11 @@ const { keys, isEmpty } = require("lodash");
 const dbConfig = require("../config/db.config");
 
 const schemas = {
-  entity: require("./entity.schema"),
+  entities: require("./entities.schema"),
   users: require("./users.schema"),
   entityRoles: require("./entityRoles.schema"),
   permissions: require("./permissions.schema"),
+  features: require("./features.schema"),
 };
 
 const models = {};

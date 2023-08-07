@@ -1,27 +1,25 @@
 const { Schema, Types, model } = require("mongoose");
 
-const { database: DBConstants } = require("../constants");
+const { database: DBEnums } = require("../enums");
 
 const userSehema = new Schema({
-  // entityId: Types.ObjectId,
-  // entityRoles: [
-  //   {
-  //     id: Types.ObjectId,
-  //     name: String,
-  //   },
-  // ],
+  entityId: Types.ObjectId,
   name: String,
   lastName: String,
-  userName: { type: String, required: true },
+  userName: { type: String },
+  phone: { type: String },
   email: {
     type: String,
-    match: [DBConstants.email, "Please fill a valid email address"],
+    match: [DBEnums.REGEX.Email, "Please fill a valid email address"],
     required: true,
+    index: true,
   },
   password: {
     type: String,
     required: true,
   },
 });
+
+userSehema.index({ email: 1 }, { unique: true });
 
 module.exports = userSehema;

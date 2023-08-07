@@ -18,7 +18,12 @@ module.exports = async ({ email, password }) => {
     );
     if (isPasswordMatched) {
       return token.createToken({
-        data: { name: userExists?.name, email: userExists?.email },
+        data: {
+          name: userExists?.name,
+          email: userExists?.email,
+          id: userExists._id || userExists.id,
+          entityId: userExists.entityId,
+        },
       });
     } else {
       return isPasswordMatched;
