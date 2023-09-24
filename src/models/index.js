@@ -7,6 +7,8 @@ const schemas = {
   entityRoles: require("./entityRoles.schema"),
   permissions: require("./permissions.schema"),
   features: require("./features.schema"),
+  tickets: require("./tickets.schema"),
+  projects: require("./projects.schema")
 };
 
 const models = {};
