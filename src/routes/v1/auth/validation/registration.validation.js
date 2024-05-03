@@ -1,5 +1,6 @@
 const joi = require("joi");
 const { regex } = require("../../../../enums");
+const { join } = require("path");
 
 module.exports = joi.object({
   phone: joi.string().required(),
@@ -13,4 +14,5 @@ module.exports = joi.object({
     "string.pattern":
       "Minimum eight characters,At least one uppercase letter,One lowercase letter,one number and one special character",
   }),
+  confirmPassword: joi.string().valid(joi.ref("password")),
 });

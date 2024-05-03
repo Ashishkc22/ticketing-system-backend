@@ -4,10 +4,9 @@ const { database: DBEnums } = require("../enums");
 
 const userSehema = new Schema({
   entityId: Types.ObjectId,
-  name: String,
+  firstName: String,
   lastName: String,
   userName: { type: String },
-  phone: { type: String },
   email: {
     type: String,
     match: [DBEnums.REGEX.Email, "Please fill a valid email address"],

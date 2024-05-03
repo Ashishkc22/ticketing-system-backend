@@ -1,5 +1,5 @@
 module.exports = (req, res, next) => {
-  res.sendData = (data, code, options) => {
+  res.sendData = (data, code = 200, options) => {
     if (typeof data === "string") {
       res.setHeader("Content-Type", "text/html");
     } else if (typeof data === "object") {

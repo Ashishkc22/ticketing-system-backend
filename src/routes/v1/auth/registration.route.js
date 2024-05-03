@@ -4,16 +4,11 @@ const {
 } = require("../../../enums");
 const { userRegistration } = require("../../../processors");
 
-const { authorization } = require("../../../middlewares");
+// const { authorization } = require("../../../middlewares");
 async function registration(req, res) {
   try {
-    const { phone, email, password, entityDetails } = req.body;
-    const payload = {
-      phone,
-      email,
-      password,
-    };
-    const result = await userRegistration({ payload, entityDetails });
+    const { email, password } = req.body;
+    const result = await userRegistration({ email, password });
     res.sendData(
       {
         message: result,
@@ -26,6 +21,6 @@ async function registration(req, res) {
   }
 }
 
-Router.post("/", authorization, registration);
+Router.post("/", registration);
 
 module.exports = Router;

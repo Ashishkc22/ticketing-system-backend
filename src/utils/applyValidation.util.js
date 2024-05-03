@@ -1,12 +1,14 @@
 function applyValidation(validation) {
   return (req, res, next) => {
     let validationBody;
-    if (req.method === "POST") {
+    if (req.method === "POST" || req.method === "DELETE") {
       validationBody = req.body;
     } else {
-      validationBody = req.params;
+      validationBody = req.query;
     }
-    const { error } = validation.validate(req.body, { abortEarly: false });
+    const { error } = validation.validate(validationBody, {
+      abortEarly: false,
+    });
     if (error) {
       res.sendData(
         {

@@ -13,7 +13,11 @@ module.exports = async (req, res, next) => {
       res.sendData({ error: "Missing access token." }, 403);
     }
   } catch (error) {
-    console.log("error----", error);
-    res.sendData({ error: "Invalid access token." }, 403);
+    console.log("error----", JSON.stringify(error));
+    if (error.message == "jwt expired") {
+      res.sendData({ error: error.message }, 401);
+    } else {
+      res.sendData({ error: "Invalid access token." }, 403);
+    }
   }
 };
