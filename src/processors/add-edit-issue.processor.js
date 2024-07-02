@@ -14,7 +14,7 @@ module.exports = async ({ entityId, issueId, data }) => {
       ...(data?.description && { description: data?.description }),
       ...(data?.dueDate && { dueDate: data?.dueDate }),
       ...(data?.summary && { summary: data?.summary }),
-      ...(data?.issueTypes && { issueTypes: data?.issueTypes }),
+      ...(data?.issueType && { issueType: data?.issueType }),
       ...(data?.status && { status: data?.status }),
       // ...(shortNotation && { shortNotation: `${shortNotation}-` }),
     };
@@ -24,20 +24,21 @@ module.exports = async ({ entityId, issueId, data }) => {
         entityId: new Types.ObjectId(entityId),
         projectId: new Types.ObjectId(data.projectId),
       });
-      console.log("count", count);
       payload.issueId = `${shortNotation}-${count + 1}`;
     }
     console.log("payload --->>>>>", JSON.stringify(payload));
     if (issueId && data?.projectId) {
       return await tickets.findOneAndUpdate(
-        { ...(issueId && { _id: new Types.ObjectId(issueId) }) },
+        {
+          _id: new Types.ObjectId(issueId),
+          projectId: new Types.ObjectId(data.projectId),
+        },
         {
           $set: payload,
         }
       );
-    } else {
-      return await tickets(payload).save();
     }
+    return await tickets(payload).save();
   } catch (error) {
     throw error;
   }

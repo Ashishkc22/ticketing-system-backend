@@ -6,5 +6,6 @@ module.exports = joi.object({
   page: joi.number().min(1).required(),
   limit: joi.number().min(5),
   search: joi.string(),
-  status: joi.string().valid(...issue.status)
+  status: joi.string().valid(...issue.status),
+  isBacklogs: joi.boolean()
 });

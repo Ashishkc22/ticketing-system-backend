@@ -30,4 +30,24 @@ Router.use(
   applyValidation(require("./validation/get-issue-list.validation")),
   require("./get-issue-list.route")
 );
+Router.use(
+  "/get-issue-by-date-range",
+  applyValidation(require("./validation/get-issue-by-date.validation")),
+  require("./get-issues.by-date.route")
+);
+Router.use(
+  "/change-issue-status",
+  applyValidation(require("./validation/change-issue-status.validation")),
+  require("./change-issue-status.route")
+);
+Router.use(
+  "/get-issue-by-id",
+  applyValidation(require("./validation/get-issue-by-id.validation")),
+  require("./get-issue-by-id.route")
+);
+Router.use(
+  "/delete-issue-by-id",
+  applyValidation(require("./validation/delete-issue-by-id.validation")),
+  require("./delete-issue-by-id.route")
+);
 module.exports = Router;

@@ -1,8 +1,11 @@
 const Router = require("express").Router();
 const { getIssues } = require("../../../processors");
+const {
+  issue: { ISSUE_TYPES },
+} = require("../../../enums");
 async function getIssueList(req, res) {
   try {
-    const { limit, page, search, projectId,status } = req.query;
+    const { limit, page, search, projectId, status, isBacklogs } = req.query;
     const { entityId } = req.context;
     const result = await getIssues({
       skip: (page - 1) * limit,
@@ -10,7 +13,7 @@ async function getIssueList(req, res) {
       search,
       entityId,
       projectId,
-      status
+      status: isBacklogs ? ISSUE_TYPES.Backlog : status,
     });
     return res.sendData({
       data: result,
