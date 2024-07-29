@@ -33,4 +33,16 @@ Router.use(
   require("./login.route")
 );
 
+Router.use(
+  "/forgot-password",
+  applyValidation(require("./validation/forgot-password.validation")),
+  require("./forgot-password.route")
+);
+
+Router.use(
+  "/reset-password",
+  applyValidation(require("./validation/reset-password.validation")),
+  require("./reset-password.route")
+);
+
 module.exports = Router;

@@ -1,3 +1,7 @@
+const {
+  initiateNodemailerInstance,
+} = require("./src/config/email-transporter.config");
+const { initiateCache } = require("./src/config/node-cache.config");
 async function startServer() {
   const app = require("express")();
   require("dotenv").config();
@@ -27,7 +31,8 @@ async function startServer() {
 
   // Routes
   app.use("/api", require("./src/routes"));
-
+  initiateNodemailerInstance();
+  initiateCache();
   const server = require("http").createServer(app);
   const PORT = process.env.PORT;
   server.listen(PORT, () => {

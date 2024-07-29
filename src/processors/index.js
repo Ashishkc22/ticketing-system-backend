@@ -10,5 +10,6 @@ module.exports = {
   getIssuesByDateRange: require("./get-issues-by-date-range.processor"),
   chnageIssueStatus:require("./change-issue-status.processor"),
   getIssueById: require("./get-issue-by-id.processor"),
-  deleteIssueById: require("./delete-issue-by-id.processor")
+  deleteIssueById: require("./delete-issue-by-id.processor"),
+  getUserByEmail: require("./get-user-by-email.processor")
 };
