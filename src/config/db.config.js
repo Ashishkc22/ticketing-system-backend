@@ -1,6 +1,7 @@
 let dbConnection;
 
-const defaultMongoUrl =
+const mongoUrl =
+  process.env.MONGO_DEV_URL ||
   "mongodb+srv://ashish224:44y10E00kubRK8lX@auth.ki2bc73.mongodb.net/?retryWrites=true&w=majority";
 
 async function getDBconnection() {
@@ -21,13 +22,10 @@ async function connectDB() {
     // require("dotenv").config();
     const mongoose = require("mongoose");
     mongoose.set("strictQuery", true);
-    return await mongoose.connect(
-      process.env.MONGO_DEV_URL || defaultMongoUrl,
-      {
-        useNewUrlParser: true,
-        useUnifiedTopology: true,
-      }
-    );
+    return await mongoose.connect(mongoUrl, {
+      useNewUrlParser: true,
+      useUnifiedTopology: true,
+    });
   } catch (error) {
     throw error || new Error("Failed to connect to DB.");
   }
